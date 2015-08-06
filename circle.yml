@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker version
+    - docker info
+    - docker build -t="blacklabelops/jenkins-swarm" .
+
+test:
+  override:
+    - docker run -d --name="jenkins-swarm" blacklabelops/jenkins-swarm
+    - docker execute jenkins-swarm java -version
