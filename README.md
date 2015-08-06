@@ -10,6 +10,8 @@ This project is ment as a base container! Perfect for building your own personal
 
 Perfectly working with the following container: [blacklabelops/jenkins](https://github.com/blacklabelops/jenkins)
 
+Blacklabelops swarm slaves can be found here: [blacklabelops/swarm](https://github.com/blacklabelops/swarm)
+
 # Make It Short
 
 In short, this container can be started arbitrary times and connect as build slaves to
