@@ -11,4 +11,4 @@ dependencies:
 test:
   override:
     - docker run -d --name="jenkins-swarm" blacklabelops/jenkins-swarm
-    - docker execute jenkins-swarm java -version
+    - docker exec jenkins-swarm java -version
