@@ -1,5 +1,12 @@
 FROM blacklabelops/java-jdk-8
-MAINTAINER Steffen Bleul <blacklabelops@itbleul.de>
+MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
+
+# install dev tools
+RUN yum install -y \
+    svn \
+    mercurial \
+    git && \
+    yum clean all && rm -rf /var/cache/yum/*
 
 # install swarm-slave
 ENV SWARM_HOME /opt/jenkins-swarm
