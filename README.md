@@ -1,12 +1,18 @@
-[![Docker Hub Info](http://dockeri.co/image/blacklabelops/jenkins-swarm)](https://registry.hub.docker.com/u/blacklabelops/jenkins-swarm)
-
-[![Docker Build Status](http://hubstatus.container42.com/blacklabelops/jenkins-swarm)](https://registry.hub.docker.com/u/blacklabelops/jenkins-swarm)
 [![Circle CI](https://circleci.com/gh/blacklabelops/jenkins-swarm/tree/master.svg?style=svg)](https://circleci.com/gh/blacklabelops/jenkins-swarm/tree/master)
 [![Image Layers](https://badge.imagelayers.io/blacklabelops/jenkins-swarm:latest.svg)](https://imagelayers.io/?images=blacklabelops/jenkins-swarm:latest 'Get your own badge on imagelayers.io')
 
 Jenkins Swarm Slave Base Image. The Jenkins swarm slave dockerized and parameterized on Java 8 CentOS.
 
+Good news! This container has rooted out root! Safely running inside userspace!
+
 This project is ment as a base container! Perfect for building your own personalized swarm-slave.
+
+Installed Software:
+
+  * Java 8
+  * Subversion
+  * Git
+  * Mercurial
 
 Perfectly working with the following container: [blacklabelops/jenkins](https://github.com/blacklabelops/jenkins)
 
