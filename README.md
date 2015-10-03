@@ -110,8 +110,8 @@ Wanna try? Here, use this command for a suitable master:
 
 ~~~~
 $ docker run -d --name jenkins_jenkins_1 \
-	-e "JENKINS_ADMIN_USER=jenkins" \
-	-e "JENKINS_ADMIN_PASSWORD=swordfish"  \
+	-e "JENKINS_USER=jenkins" \
+	-e "JENKINS_PASSWORD=swordfish"  \
 	-p 8090:8080 \
 	blacklabelops/jenkins
 ~~~~
