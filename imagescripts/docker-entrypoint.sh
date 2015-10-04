@@ -1,7 +1,7 @@
 #!/bin/bash -x
 set -o errexit
 
-jenkins_default_parameters="-fsroot /opt/jenkins-swarm/ -disableSslVerification"
+jenkins_default_parameters="-fsroot /home/jenkins -disableSslVerification"
 
 java_vm_parameters=""
 
