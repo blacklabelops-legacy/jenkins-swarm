@@ -5,6 +5,8 @@ Jenkins Swarm Slave Base Image. The Jenkins swarm slave dockerized and parameter
 
 Good news! This container has rooted out root! Safely running inside userspace!
 
+Good news ! Now supports Github [Git LFS](https://git-lfs.github.com/)
+
 This project is ment as a base container! Perfect for building your own personalized swarm-slave.
 
 Installed Software:
@@ -13,6 +15,7 @@ Installed Software:
   * Subversion
   * Git
   * Mercurial
+  * [Git LFS](https://git-lfs.github.com/)
 
 Perfectly working with the following container: [blacklabelops/jenkins](https://github.com/blacklabelops/jenkins)
 

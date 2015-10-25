@@ -17,6 +17,13 @@ RUN yum install -y \
     git && \
     yum clean all && rm -rf /var/cache/yum/*
 
+# install git-lfs
+ENV GIT_LFS_VERSION=1.0.0
+RUN wget --no-check-certificate -O /tmp/git-lfs-linux-amd64.tar.gz https://github.com/github/git-lfs/releases/download/v${GIT_LFS_VERSION}/git-lfs-linux-amd64-${GIT_LFS_VERSION}.tar.gz && \
+    tar xfv /tmp/git-lfs-linux-amd64.tar.gz -C /tmp && \
+    cd /tmp/git-lfs-${GIT_LFS_VERSION}/ && bash -c "/tmp/git-lfs-${GIT_LFS_VERSION}/install.sh" && \
+    git lfs init
+
 # install swarm-slave
 ENV SWARM_HOME /home/jenkins
 ENV SWARM_JAVA_HOME=/opt/java/jdk${JAVA_VERSION}
