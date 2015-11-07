@@ -3,9 +3,9 @@
 
 Jenkins Swarm Slave Base Image. The Jenkins swarm slave dockerized and parameterized on Java 8 CentOS.
 
-Good news! This container has rooted out root! Safely running inside userspace!
+Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](https://www.hipchat.com/geogBFvEM)
 
-Good news ! Now supports Github [Git LFS](https://git-lfs.github.com/)
+Good news! This container has rooted out root! Safely running inside userspace!
 
 This project is ment as a base container! Perfect for building your own personalized swarm-slave.
 
@@ -14,6 +14,7 @@ Installed Software:
   * Java 8
   * Subversion
   * Git
+  * Github LFS
   * Mercurial
   * [Git LFS](https://git-lfs.github.com/)
 
