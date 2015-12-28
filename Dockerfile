@@ -1,4 +1,4 @@
-FROM blacklabelops/java-jdk-8
+FROM blacklabelops/java-jdk-8:8.66.17
 MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 
 # Propert permissions
