@@ -24,7 +24,7 @@ fi
 jenkins_user=""
 
 if [ -n "${JENKINS_USER}" ] && [ -n "${JENKINS_PASSWORD}" ]; then
-  jenkins_user="-username "${JENKINS_USER}" -password ${JENKINS_PASSWORD}"
+  jenkins_user="-username "${JENKINS_USER}" -password "${JENKINS_PASSWORD}
 fi
 
 jenkins_executors=""
