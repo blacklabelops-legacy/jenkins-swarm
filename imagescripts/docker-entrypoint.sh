@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 set -o errexit
 
 jenkins_default_parameters="-fsroot /home/jenkins -disableSslVerification"
@@ -24,7 +24,7 @@ fi
 jenkins_user=""
 
 if [ -n "${JENKINS_USER}" ] && [ -n "${JENKINS_PASSWORD}" ]; then
-  jenkins_user="-username "${JENKINS_USER}" -passwordEnvVariable JENKINS_PASSWORD"
+  jenkins_user="-username "${JENKINS_USER}" -password ${JENKINS_PASSWORD}"
 fi
 
 jenkins_executors=""
@@ -38,6 +38,10 @@ swarm_labels=""
 if [ -n "${SWARM_CLIENT_LABELS}" ]; then
   swarm_labels="-labels '"${SWARM_CLIENT_LABELS}"'"
 fi
+
+unset JENKINS_USER
+unset JENKINS_PASSWORD
+unset JENKINS_MASTER_URL
 
 if [ "$1" = 'swarm' ]; then
   /bin/bash -c "${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar /home/jenkins/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters}"
