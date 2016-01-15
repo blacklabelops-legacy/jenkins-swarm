@@ -60,7 +60,7 @@ MAINTAINER Your Name <youremail@yourhost.com>
 # install toolset
 RUN ...
 
-ENTRYPOINT ["/opt/jenkins-swarm/docker-entrypoint.sh"]
+ENTRYPOINT ["/home/jenkins/docker-entrypoint.sh"]
 CMD ["swarm"]
 ~~~~
 
