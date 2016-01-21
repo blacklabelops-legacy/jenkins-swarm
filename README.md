@@ -30,7 +30,7 @@ a Jenkins master instance. You need 10 Java JDK 8 build slaves? You want to star
 First start a master!
 
 ~~~~
-$ docker run -d -p 8090:8080 --name jenkins_jenkins_1 blacklabelops/jenkins
+$ docker run -d -p 8090:8080 --name jenkins blacklabelops/jenkins
 ~~~~
 
 > This will pull the my jenkins container ready with swarm plugin and ready-to-use!
@@ -38,9 +38,9 @@ $ docker run -d -p 8090:8080 --name jenkins_jenkins_1 blacklabelops/jenkins
 Now swarm the place!
 
 ~~~~
-$ docker run -d --link jenkins_jenkins_1:jenkins blacklabelops/jenkins-swarm
-$ docker run -d --link jenkins_jenkins_1:jenkins blacklabelops/jenkins-swarm
-$ docker run -d --link jenkins_jenkins_1:jenkins blacklabelops/jenkins-swarm
+$ docker run -d --link jenkins:jenkins blacklabelops/jenkins-swarm
+$ docker run -d --link jenkins:jenkins blacklabelops/jenkins-swarm
+$ docker run -d --link jenkins:jenkins blacklabelops/jenkins-swarm
 ~~~~
 
 > This will start 3 Java JDK 8 build slaves, each with 4 build processors! This setup will
@@ -67,13 +67,13 @@ CMD ["swarm"]
 # Setting the Jenkins Master URL
 
 Define your Jenkins master URL. This setup does not need linking. The URL can be specified
-by the `JENKINS_MASTER_URL` environment variable.
+by the `SWARM_MASTER_URL` environment variable.
 
 Example:
 
 ~~~~
 $ docker run -d \
-  -e "JENKINS_MASTER_URL=http://192.168.59.103:8090/" \
+  -e "SWARM_MASTER_URL=http://192.168.59.103:8090/" \
   blacklabelops/jenkins-swarm
 ~~~~
 
@@ -84,14 +84,14 @@ $ docker run -d \
 You can define additional swarm parameters specified in the swarm client documentation
 [Swarm Plugin Homepage](https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin). The swarm
 parameters are simply attached and should not override parameters that are controlled by
-environment variables, e.g. `JENKINS_MASTER_URL`!
+environment variables, e.g. `SWARM_MASTER_URL`!
 
 Example defining the title and description of a swarm client with the environment variable
 `SWARM_CLIENT_PARAMETERS`:
 
 ~~~~
 $ docker run -d \
-  --link jenkins_jenkins_1:jenkins \
+  --link jenkins:jenkins \
 	-e "SWARM_CLIENT_PARAMETERS=-name 'Super-Build' -description 'Super Client'" \
 	blacklabelops/jenkins-swarm
 ~~~~
@@ -101,16 +101,16 @@ $ docker run -d \
 Authentication for the Jenkins master instance. Define username and password with the
 following environment variables:
 
-* `JENKINS_USER`
-* `JENKINS_PASSWORD`
+* `SWARM_JENKINS_USER`
+* `SWARM_JENKINS_PASSWORD`
 
 Example:
 
 ~~~~
 $ docker run -d \
   --link jenkins_jenkins_1:jenkins \
-	-e "JENKINS_USER=jenkins" \
-  -e "JENKINS_PASSWORD=swordfish" \
+	-e "SWARM_JENKINS_USER=jenkins" \
+  -e "SWARM_JENKINS_PASSWORD=swordfish" \
 	blacklabelops/jenkins-swarm
 ~~~~
 
@@ -120,8 +120,8 @@ Wanna try? Here, use this command for a suitable master:
 
 ~~~~
 $ docker run -d --name jenkins_jenkins_1 \
-	-e "JENKINS_USER=jenkins" \
-	-e "JENKINS_PASSWORD=swordfish"  \
+	-e "SWARM_JENKINS_USER=jenkins" \
+	-e "SWARM_JENKINS_PASSWORD=swordfish"  \
 	-p 8090:8080 \
 	blacklabelops/jenkins
 ~~~~
@@ -152,7 +152,7 @@ Example:
 
 ~~~~
 $ docker run -d \
-  --link jenkins_jenkins_1:jenkins \
+  --link jenkins:jenkins \
 	-e "SWARM_CLIENT_LABELS=jdk8 java" \
 	blacklabelops/jenkins-swarm
 ~~~~
@@ -163,8 +163,8 @@ Yes, this all works perfectly with HTTPS. Your communication and artifacts are s
 
 ~~~~
 $ docker run \
-  --link jenkins_jenkins_1:jenkins \
-	-e "JENKINS_MASTER_URL=https://jenkins:8080/" \
+  --link jenkins:jenkins \
+	-e "SWARM_MASTER_URL=https://jenkins:8080/" \
 	blacklabelops/jenkins-swarm
 ~~~~
 
@@ -174,7 +174,7 @@ the swarm client.
 Wanna try? Here, use this command for a suitable master:
 
 ~~~~
-$ docker run -d --name jenkins_jenkins_1 \
+$ docker run -d --name jenkins \
 	-e "JENKINS_KEYSTORE_PASSWORD=swordfish" \
 	-e "JENKINS_CERTIFICATE_DNAME=CN=SBleul,OU=Blacklabelops,O=blacklabelops.net,L=Munich,S=Bavaria,C=DE" \
 	-p 8090:8080 \
@@ -189,8 +189,8 @@ You can define start up parameters for the Java Virtual Machine, e.g. setting th
 
 ~~~~
 $ docker run \
-  --link jenkins_jenkins_1:jenkins \
-	-e "JAVA_VM_PARAMETERS=-Xmx512m -Xms256m" \
+  --link jenkins:jenkins \
+	-e "SWARM_VM_PARAMETERS=-Xmx512m -Xms256m" \
 	blacklabelops/jenkins-swarm
 ~~~~
 
