@@ -38,9 +38,9 @@ $ docker run -d -p 8090:8080 --name jenkins blacklabelops/jenkins
 Now swarm the place!
 
 ~~~~
-$ docker run -d --link jenkins:jenkins blacklabelops/jenkins-swarm
-$ docker run -d --link jenkins:jenkins blacklabelops/jenkins-swarm
-$ docker run -d --link jenkins:jenkins blacklabelops/jenkins-swarm
+$ docker run -d --link jenkins blacklabelops/jenkins-swarm
+$ docker run -d --link jenkins blacklabelops/jenkins-swarm
+$ docker run -d --link jenkins blacklabelops/jenkins-swarm
 ~~~~
 
 > This will start 3 Java JDK 8 build slaves, each with 4 build processors! This setup will
