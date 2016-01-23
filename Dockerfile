@@ -28,10 +28,12 @@ RUN wget --no-check-certificate -O /tmp/git-lfs-linux-amd64.tar.gz https://githu
 ENV SWARM_HOME /home/jenkins
 ENV SWARM_JAVA_HOME=/opt/java/jdk${JAVA_VERSION}
 ENV SWARM_VERSION 2.0
+ENV SWARM_WORKDIR=/opt/jenkins
 RUN wget --no-check-certificate --directory-prefix=${SWARM_HOME} \
       http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar  && \
     mv ${SWARM_HOME}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar && \
-    chown -R jenkins:jenkins ${SWARM_HOME} && \
+    mkdir -p ${SWARM_WORKDIR} && \
+    chown -R jenkins:jenkins ${SWARM_HOME} ${SWARM_WORKDIR} && \
     chmod +x ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar
 
 # docker entrypoint env variables
@@ -44,7 +46,8 @@ ENV SWARM_CLIENT_EXECUTORS=
 ENV SWARM_CLIENT_LABELS=
 
 USER $CONTAINER_UID
-WORKDIR /home/jenkins
+WORKDIR ${SWARM_WORKDIR}
+VOLUME ["/opt/jenkins"]
 COPY imagescripts/docker-entrypoint.sh /home/jenkins/docker-entrypoint.sh
 ENTRYPOINT ["/home/jenkins/docker-entrypoint.sh"]
 CMD ["swarm"]

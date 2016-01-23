@@ -51,8 +51,10 @@ unset SWARM_JENKINS_USER
 unset SWARM_JENKINS_PASSWORD
 unset SWARM_MASTER_URL
 
+jenkins_workdir="-fsroot ${SWARM_WORKDIR}"
+
 if [ "$1" = 'swarm' ]; then
-  /bin/bash -c "${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar /home/jenkins/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters}"
+  /bin/bash -c "${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar /home/jenkins/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir}"
 fi
 
 exec "$@"
