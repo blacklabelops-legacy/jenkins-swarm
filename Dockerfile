@@ -1,4 +1,4 @@
-FROM blacklabelops/java-jdk-8
+FROM blacklabelops/java:centos.jdk8
 MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 
 # Propert permissions
@@ -12,6 +12,9 @@ RUN /usr/sbin/groupadd --gid $CONTAINER_GID jenkins && \
 
 # install dev tools
 RUN yum install -y \
+    wget \
+    tar \
+    gzip \
     svn \
     mercurial \
     git && \
