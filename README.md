@@ -57,8 +57,14 @@ Example:
 FROM blacklabelops/jenkins-swarm
 MAINTAINER Your Name <youremail@yourhost.com>
 
+# Need root to install tools via yum
+USER root
+
 # install toolset
 RUN ...
+
+# Switch back to user jenkins
+USER $CONTAINER_UID
 
 ENTRYPOINT ["/home/jenkins/docker-entrypoint.sh"]
 CMD ["swarm"]
