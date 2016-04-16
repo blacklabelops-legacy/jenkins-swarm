@@ -13,5 +13,6 @@ dependencies:
 
 test:
   override:
+    - docker run blacklabelops/jenkins-swarm -help
     - docker run -d --name="jenkins-swarm" blacklabelops/jenkins-swarm
     - docker logs jenkins-swarm
