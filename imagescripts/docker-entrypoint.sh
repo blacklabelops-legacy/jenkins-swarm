@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -o errexit
 
 if [ -n "${SWARM_DELAYED_START}" ]; then
@@ -9,7 +10,7 @@ if [ -n "${SWARM_ENV_FILE}" ]; then
   source ${SWARM_ENV_FILE}
 fi
 
-jenkins_default_parameters="-fsroot /home/jenkins -disableSslVerification"
+jenkins_default_parameters="-disableSslVerification"
 
 java_vm_parameters=""
 
@@ -54,7 +55,12 @@ unset SWARM_MASTER_URL
 jenkins_workdir="-fsroot ${SWARM_WORKDIR}"
 
 if [ "$1" = 'swarm' ]; then
-  /bin/bash -c "${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar /home/jenkins/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir}"
+  # Run the Swarm-Client according to environment variables.
+  exec ${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir}
+fi
+if [[ "$1" == '-'* ]]; then
+  # Run the Swarm-Client with passed parameters.
+  exec java ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar "$@"
 fi
 
 exec "$@"
