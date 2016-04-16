@@ -58,9 +58,10 @@ if [ "$1" = 'swarm' ]; then
   # Run the Swarm-Client according to environment variables.
   exec ${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir}
 fi
-if [[ "$1" == '-'* ]]; then
+if [ "$1" == '-'* ]; then
+  echo "test"
   # Run the Swarm-Client with passed parameters.
-  exec java ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar "$@"
+  exec java $JAVA_OPTS -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar "$@"
 fi
 
 exec "$@"
