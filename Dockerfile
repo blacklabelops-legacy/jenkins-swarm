@@ -1,6 +1,8 @@
 FROM blacklabelops/java:centos.jre8
 MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 
+# Jenkins Swarm Version
+ARG SWARM_VERSION=2.0
 # Container User
 ARG CONTAINER_USER=swarmslave
 ARG CONTAINER_UID=1000
@@ -10,7 +12,6 @@ ARG CONTAINER_GID=1000
 # Container Internal Environment Variables
 ENV SWARM_HOME=/opt/jenkins-swarm \
     SWARM_JAVA_HOME=/opt/java/jre${JAVA_VERSION} \
-    SWARM_VERSION=2.0 \
     SWARM_WORKDIR=/opt/jenkins
 
 RUN /usr/sbin/groupadd --gid $CONTAINER_GID $CONTAINER_GROUP && \
