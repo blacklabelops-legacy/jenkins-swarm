@@ -42,21 +42,19 @@ if [ -n "${SWARM_CLIENT_EXECUTORS}" ]; then
   jenkins_executors="-executors "${SWARM_CLIENT_EXECUTORS}
 fi
 
-swarm_labels=""
-
-if [ -n "${SWARM_CLIENT_LABELS}" ]; then
-  swarm_labels="-labels '"${SWARM_CLIENT_LABELS}"'"
-fi
-
 unset SWARM_JENKINS_USER
 unset SWARM_JENKINS_PASSWORD
 unset SWARM_MASTER_URL
 
-jenkins_workdir="-fsroot ${SWARM_WORKDIR}"
+jenkins_workdir="-fsroot "${SWARM_WORKDIR}
 
 if [ "$1" = 'swarm' ]; then
   # Run the Swarm-Client according to environment variables.
-  exec ${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${swarm_labels} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir}
+  if [ -n "${SWARM_CLIENT_LABELS}" ]; then
+    exec ${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir} -labels "${SWARM_CLIENT_LABELS}"
+  else
+    exec ${SWARM_JAVA_HOME}/bin/java -Dfile.encoding=UTF-8 ${java_vm_parameters} -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar ${jenkins_default_parameters} -master ${jenkins_master} ${jenkins_executors} ${jenkins_user} ${jenkins_swarm_parameters} ${jenkins_workdir}
+  fi
 elif [[ "$1" == '-'* ]]; then
   # Run the Swarm-Client with passed parameters.
   exec ${SWARM_JAVA_HOME}/bin/java $JAVA_OPTS -jar ${SWARM_HOME}/swarm-client-jar-with-dependencies.jar "$@"
