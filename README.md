@@ -1,8 +1,5 @@
 # Dockerized Jenkins Swarm-Slave
 
-[![Circle CI](https://circleci.com/gh/blacklabelops/jenkins-swarm/tree/master.svg?style=svg)](https://circleci.com/gh/blacklabelops/jenkins-swarm/tree/master)
-[![Image Layers](https://badge.imagelayers.io/blacklabelops/jenkins-swarm:latest.svg)](https://imagelayers.io/?images=blacklabelops/jenkins-swarm:latest 'Get your own badge on imagelayers.io')
-
 ## What's Inside
 
 Installed Software:
@@ -288,10 +285,6 @@ First install:
 
 * [Vagrant](https://www.vagrantup.com/)
 * [Virtualbox](https://www.virtualbox.org/)
-
-# Support
-
-Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](http://support.blacklabelops.com)
 
 # References
 
